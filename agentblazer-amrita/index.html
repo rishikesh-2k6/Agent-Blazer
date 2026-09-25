@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agentblazer — Amrita Amaravati | Student Technology Community</title>
+  <meta name="description" content="Official student technology community registration portal for Agentblazer at Amrita Vishwa Vidyapeetham, Amaravati. Explore AI, intelligent agents, and innovative real-world projects.">
+  <meta property="og:title" content="Agentblazer — Amrita Amaravati">
+  <meta property="og:description" content="Student technology community registration portal for Agentblazer at Amrita Vishwa Vidyapeetham, Amaravati.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <!-- Ambient Light Effects & Sky Canvas -->
+  <div class="ambient-glow glow-top-right"></div>
+  <div class="ambient-glow glow-bottom-left"></div>
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Development Mode Notification Banner -->
+  <div id="dev-banner" class="dev-banner" style="display: none;"></div>
+
+  <!-- Main Navigation -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#hero" class="brand-link">
+        <img src="/src/assets/images/agentblazer_insignia_1790334143628.jpg" alt="Agentblazer Emblem" class="brand-logo-img" referrerPolicy="no-referrer">
+        <div class="brand-meta">
+          <span class="brand-title">AGENTBLAZER</span>
+          <span class="brand-subtitle">Amrita Amaravati</span>
+        </div>
+      </a>
+
+      <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <ul id="nav-links" class="nav-links">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#domains" class="nav-link">Domains</a></li>
+        <li><a href="#journey" class="nav-link">Journey</a></li>
+        <li><a href="#why-join" class="nav-link">Why Join</a></li>
+        <li><a href="admin.html" class="nav-link" style="color: #0176D3; font-weight: 700;">Admin</a></li>
+        <li>
+          <a href="#registration" class="nav-cta-btn">
+            <span>Activate Agent</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       SECTION 1: HERO (LIGHT THEME SPLIT HERO WITH AGENTFORCE 3D SCENE)
+       ========================================================================== -->
+  <section id="hero" class="hero-section">
+    <div class="container">
+      <div class="hero-grid">
+        <!-- Left: Text & CTA -->
+        <div class="hero-content">
+          <div class="hero-status-tag">
+            <span class="status-dot"></span>
+            <span class="status-text">Official Registration Open</span>
+          </div>
+
+          <div class="hero-campus-banner">
+            Amrita Vishwa Vidyapeetham · Amaravati
+          </div>
+
+          <h1 class="hero-title">
+            THE FUTURE NEEDS <span class="highlight-gradient">BUILDERS.</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            Explore AI. Build intelligent agents. Solve real problems.
+          </p>
+
+          <p class="hero-supporting">
+            A student technology community for hands-on learning, intelligent agents, Agentforce journeys, collaboration and innovation across campuses.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#registration" class="btn-primary">
+              <span>START YOUR JOURNEY</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <a href="#about" class="btn-secondary">
+              <span>DISCOVER CLUB</span>
+            </a>
+          </div>
+
+          <div class="hero-stats-strip">
+            <span class="highlight">125 First Intake Target</span>
+            <span class="sep">·</span>
+            <span>CSE & Allied Branches</span>
+            <span class="sep">·</span>
+            <span>Agentforce Exploration</span>
+            <span class="sep">·</span>
+            <span>Monthly Activities</span>
+          </div>
+        </div>
+
+        <!-- Right: 3D Agentforce Landscape Display -->
+        <div class="hero-media-wrapper">
+          <div class="hero-display-card">
+            <img src="/src/assets/images/hero_agentforce_banner_1790334076869.jpg" alt="Agentforce AI Autonomous Ecosystem" class="hero-img" referrerPolicy="no-referrer">
+            <div class="hero-floating-badge">
+              <div>
+                <div class="floating-meta-title">Agentforce Ecosystem</div>
+                <div class="floating-meta-sub">Autonomous AI & Cloud Architecture</div>
+              </div>
+              <div class="floating-icon-pill">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                  <path d="M2 17l10 5 10-5"></path>
+                  <path d="M2 12l10 5 10-5"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 2: ABOUT AGENTBLAZER WITH CAMPUS LAB SHOWCASE
+       ========================================================================== -->
+  <section id="about" class="about-section">
+    <div class="container">
+      <div class="center-header">
+        <span class="section-kicker">COMMUNITY OVERVIEW</span>
+        <h2 class="section-title">WHAT IS AGENTBLAZER?</h2>
+      </div>
+
+      <div class="about-split-layout">
+        <!-- Photo of students collaborating in lab -->
+        <div class="about-image-card">
+          <img src="/src/assets/images/agentblazer_community_1790334095115.jpg" alt="Amrita Students Collaborating in AI Lab" class="about-showcase-img" referrerPolicy="no-referrer">
+        </div>
+
+        <!-- Text & 4 Pillars -->
+        <div>
+          <div class="about-lead-box">
+            <p class="about-lead-text">
+              "Agentblazer is a student technology community where curious minds come together to explore Artificial Intelligence, intelligent agents, Agentforce, emerging technologies and real-world problem solving."
+            </p>
+          </div>
+
+          <div class="grid-two-by-two">
+            <!-- 1: LEARN -->
+            <div class="about-card">
+              <div class="card-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                </svg>
+              </div>
+              <h3>LEARN</h3>
+              <p>Explore AI, intelligent agents and emerging technologies.</p>
+            </div>
+
+            <!-- 2: BUILD -->
+            <div class="about-card">
+              <div class="card-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+              </div>
+              <h3>BUILD</h3>
+              <p>Turn ideas into practical projects and prototypes.</p>
+            </div>
+
+            <!-- 3: CONNECT -->
+            <div class="about-card">
+              <div class="card-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+              <h3>CONNECT</h3>
+              <p>Learn from peers, alumni, practitioners and industry interactions.</p>
+            </div>
+
+            <!-- 4: CREATE IMPACT -->
+            <div class="about-card">
+              <div class="card-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polygon points="12 8 8 12 12 16 16 12 12 8"></polygon>
+                </svg>
+              </div>
+              <h3>CREATE IMPACT</h3>
+              <p>Apply technology to real-world problems through projects, challenges and hackathons.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 3: WHAT CAN YOU EXPLORE? (FIND YOUR SPACE)
+       ========================================================================== -->
+  <section id="domains" class="domains-section">
+    <div class="container">
+      <div class="center-header">
+        <span class="section-kicker">MULTIDISCIPLINARY OPPORTUNITIES</span>
+        <h2 class="section-title">FIND YOUR SPACE</h2>
+        <p class="section-desc">
+          Agentblazer is not restricted to only one technical skill. Whatever your curiosity, there is an agentic pathway for you to contribute and grow.
+        </p>
+      </div>
+
+      <div class="domains-grid">
+        <!-- 1 -->
+        <div class="domain-card">
+          <div class="domain-header">
+            <div class="domain-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            </div>
+            <span class="domain-name">AI & AGENTIC AI</span>
+          </div>
+          <p class="domain-desc">Autonomous reasoning, multi-agent workflows, and intelligent decision systems.</p>
+        </div>
+
+        <!-- 2 -->
+        <div class="domain-card">
+          <div class="domain-header">
+            <div class="domain-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+            </div>
+            <span class="domain-name">AGENTFORCE</span>
+          </div>
+          <p class="domain-desc">Exploring Agentforce journeys, enterprise agents, and action-driven intelligence.</p>
+        </div>
+
+        <!-- 3 -->
+        <div class="domain-card">
+          <div class="domain-header">
+            <div class="domain-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>
+            </div>
+            <span class="domain-name">CLOUD</span>
+          </div>
+          <p class="domain-desc">Scalable infrastructure, serverless deployments, and cloud architectures.</p>
+        </div>
+
+        <!-- 4 -->
+        <div class="domain-card">
+          <div class="domain-header">
+            <div class="domain-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            </div>
+            <span class="domain-name">SOFTWARE DEVELOPMENT</span>
+          </div>
+          <p class="domain-desc">Modern engineering principles, clean code patterns, and dependable systems.</p>
+        </div>
+
+        <!-- 5 -->
+        <div class="domain-card">
+          <div class="domain-header">
+            <div class="domain-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            </div>
+            <span class="domain-name">DATA & ANALYTICS</span>
+          </div>
+          <p class="domain-desc">Data pipelines, feature engineering, statistical modeling, and insights.</p>
+        </div>
+
+        <!-- 6 -->
+        <div class="domain-card">
+          <div class="domain-header">
+            <div class="domain-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            </div>
+            <span class="domain-name">WEB DEVELOPMENT</span>
+          </div>
+          <p class="domain-desc">High-performance full-stack web applications and interactive client interfaces.</p>
+        </div>
+
+        <!-- 7 -->
+        <div class="domain-card">
+          <div class="domain-header">
+            <div class="domain-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+            </div>
+            <span class="domain-name">APP DEVELOPMENT</span>
+          </div>
+          <p class="domain-desc">Native and cross-platform mobile experiences for real-world user workflows.</p>
+        </div>
+
+        <!-- 8 -->
+        <div class="domain-card">
+          <div class="domain-header">
+            <div class="domain-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+            </div>
+            <span class="domain-name">UI / UX</span>
+          </div>
+          <p class="domain-desc">Human-centered interface craft, usability research, and futuristic design systems.</p>
+        </div>
+
+        <!-- 9 -->
+        <div class="domain-card">
+          <div class="domain-header">
+            <div class="domain-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <span class="domain-name">CYBERSECURITY</span>
+          </div>
+          <p class="domain-desc">Agent guardrails, system defensive security, vulnerability testing, and data safety.</p>
+        </div>
+
+        <!-- 10 -->
+        <div class="domain-card">
+          <div class="domain-header">
+            <div class="domain-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            </div>
+            <span class="domain-name">BUSINESS & PRODUCT</span>
+          </div>
+          <p class="domain-desc">Product strategy, roadmap validation, user persona modeling, and tech leadership.</p>
+        </div>
+
+        <!-- 11 -->
+        <div class="domain-card">
+          <div class="domain-header">
+            <div class="domain-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+            </div>
+            <span class="domain-name">RESEARCH</span>
+          </div>
+          <p class="domain-desc">Deep exploration of cutting-edge AI publications, model architectures, and algorithms.</p>
+        </div>
+
+        <!-- 12 -->
+        <div class="domain-card">
+          <div class="domain-header">
+            <div class="domain-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            </div>
+            <span class="domain-name">COMMUNITY & EVENTS</span>
+          </div>
+          <p class="domain-desc">Organizing AI learning days, speaker sessions, workshops, and hackathons.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 4: AGENTBLAZER JOURNEY (WITH 3D JOURNEY COMPANION)
+       ========================================================================== -->
+  <section id="journey" class="journey-section">
+    <div class="container">
+      <div class="center-header">
+        <span class="section-kicker">LEARNING & GROWTH ROADMAP</span>
+        <h2 class="section-title">YOUR JOURNEY STARTS HERE</h2>
+        <p class="section-desc">
+          A structured sequence designed to take students from curious explorers to confident builders in the AI and cloud ecosystem.
+        </p>
+      </div>
+
+      <div class="journey-split-layout">
+        <!-- Left: Interactive Timeline -->
+        <div class="timeline-wrap">
+          <!-- 01 -->
+          <div class="timeline-item">
+            <div class="timeline-badge">01</div>
+            <div class="timeline-card">
+              <h3>AI LEARNING DAYS</h3>
+              <p>Explore the fundamentals and possibilities of AI through immersive sessions and collaborative discussions.</p>
+            </div>
+          </div>
+
+          <!-- 02 -->
+          <div class="timeline-item">
+            <div class="timeline-badge">02</div>
+            <div class="timeline-card">
+              <h3>AGENTFORCE JOURNEY</h3>
+              <p>Begin exploring the Agentforce Champions Journey, unlocking practical insights into autonomous agent creation.</p>
+            </div>
+          </div>
+
+          <!-- 03 -->
+          <div class="timeline-item">
+            <div class="timeline-badge">03</div>
+            <div class="timeline-card">
+              <h3>BUILD</h3>
+              <p>Work on practical projects and ideas, transforming technical theory into tangible software prototypes.</p>
+            </div>
+          </div>
+
+          <!-- 04 -->
+          <div class="timeline-item">
+            <div class="timeline-badge">04</div>
+            <div class="timeline-card">
+              <h3>CONNECT</h3>
+              <p>Interact with alumni, practitioners and industry professionals to gain first-hand engineering perspective.</p>
+            </div>
+          </div>
+
+          <!-- 05 -->
+          <div class="timeline-item">
+            <div class="timeline-badge">05</div>
+            <div class="timeline-card">
+              <h3>HACK & INNOVATE</h3>
+              <p>Participate in hackathons and industry-oriented challenges to solve real-world problem statements.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: 3D Agentforce Journey Showcase Card -->
+        <div class="journey-feature-col">
+          <div class="journey-visual-card">
+            <img src="/src/assets/images/agentforce_journey_1790334112259.jpg" alt="Agentforce Journey Autonomous Agent Trail" class="journey-visual-img" referrerPolicy="no-referrer">
+            <div class="journey-visual-info">
+              <div class="journey-visual-tag">Trailhead Pathways & Micro-Community</div>
+              <h4 class="journey-visual-title">The Agentforce Champions Journey</h4>
+              <p class="journey-visual-desc">
+                Engage in experiential hands-on modules, earn Trailhead skill credentials, and build real agentic workflows that orchestrate autonomous actions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 5: WHY JOIN? (WITH HACKATHON INNOVATION SHOWCASE)
+       ========================================================================== -->
+  <section id="why-join" class="why-section">
+    <div class="container">
+      <div class="center-header">
+        <span class="section-kicker">THE AGENTBLAZER ADVANTAGE</span>
+        <h2 class="section-title">MORE THAN A CLUB.</h2>
+        <p class="section-desc">
+          An ecosystem designed to elevate your technical abilities and provide real momentum to your engineering career.
+        </p>
+      </div>
+
+      <div class="why-grid">
+        <!-- 1 -->
+        <div class="why-card">
+          <div class="why-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+          </div>
+          <h3>HANDS-ON LEARNING</h3>
+          <p>Move from concepts to practical building with code and real systems.</p>
+        </div>
+
+        <!-- 2 -->
+        <div class="why-card">
+          <div class="why-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path></svg>
+          </div>
+          <h3>AI EXPLORATION</h3>
+          <p>Explore intelligent agents and emerging AI technologies at the cutting edge.</p>
+        </div>
+
+        <!-- 3 -->
+        <div class="why-card">
+          <div class="why-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+          </div>
+          <h3>PROJECTS</h3>
+          <p>Turn ideas into practical solutions that can be demoed and deployed.</p>
+        </div>
+
+        <!-- 4 -->
+        <div class="why-card">
+          <div class="why-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          </div>
+          <h3>HACKATHONS</h3>
+          <p>Build and solve problems under real-world constraints alongside motivated peers.</p>
+        </div>
+
+        <!-- 5 -->
+        <div class="why-card">
+          <div class="why-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+          </div>
+          <h3>INDUSTRY EXPOSURE</h3>
+          <p>Learn directly from practitioners and alumni working in top tech domains.</p>
+        </div>
+
+        <!-- 6 -->
+        <div class="why-card">
+          <div class="why-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+          </div>
+          <h3>CROSS-DOMAIN COLLABORATION</h3>
+          <p>Work with students from different branches to build multifaceted solutions.</p>
+        </div>
+
+        <!-- 7 -->
+        <div class="why-card">
+          <div class="why-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </div>
+          <h3>COMMUNITY</h3>
+          <p>Become part of a growing, ambitious student technology community.</p>
+        </div>
+      </div>
+
+      <!-- Hackathon Banner Feature -->
+      <div class="hackathon-banner-card">
+        <img src="/src/assets/images/hackathon_innovation_1790334125890.jpg" alt="Student AI Hackathon" class="hackathon-banner-img" referrerPolicy="no-referrer">
+        <div class="hackathon-banner-content">
+          <div class="hackathon-kicker">CAMPUS HACKATHONS & SPRINTS</div>
+          <h3 class="hackathon-title">Tackle Real Industry Challenges</h3>
+          <p class="hackathon-desc">
+            Explore problem statements inspired by enterprise ecosystems, build autonomous agent prototypes, and present live demos before alumni and seasoned mentors.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 6: REGISTRATION WIZARD (ACTIVATE YOUR AGENT)
+       ========================================================================== -->
+  <section id="registration" class="registration-section">
+    <div class="container reg-outer-container">
+      <div class="center-header">
+        <span class="section-kicker">MEMBERSHIP APPLICATION</span>
+        <h2 class="section-title">ACTIVATE YOUR AGENT</h2>
+        <p class="section-desc">
+          Tell us a little about yourself.
+        </p>
+      </div>
+
+      <!-- Membership Notice -->
+      <div class="reg-notice-box">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <span class="reg-notice-text">
+          Limited membership. Final selection will consider club requirements, student interest, branch diversity and active participation potential.
+        </span>
+      </div>
+
+      <!-- Submission Error Banner -->
+      <div id="submission-error" class="submission-error-banner"></div>
+
+      <!-- Step Wizard Card -->
+      <div class="reg-wizard-card">
+        <div class="wizard-progress-header">
+          <div class="steps-indicator">
+            <div class="step-label-group">
+              <span id="current-step-number" class="step-number-tag">STEP 01 / 03</span>
+              <span style="color: var(--border-card);">·</span>
+              <span id="current-step-title" class="step-title-tag">IDENTITY</span>
+            </div>
+            <span class="step-time-est">Est. time: ~2 mins</span>
+          </div>
+          <div class="progress-track">
+            <div id="progress-bar-fill" class="progress-bar-fill"></div>
+          </div>
+        </div>
+
+        <form id="agentblazer-form" novalidate>
+          <!-- STEP 1: IDENTITY -->
+          <div id="step-pane-1" class="step-pane active">
+            <div class="step-pane-header">
+              <h3 class="step-pane-title">WHO ARE YOU?</h3>
+              <p class="step-pane-desc">Please provide your verified academic contact information.</p>
+            </div>
+
+            <!-- Full Name -->
+            <div class="form-group" data-field-group="full-name">
+              <label class="form-label" for="full-name">
+                Full Name <span class="label-required">*</span>
+              </label>
+              <input type="text" id="full-name" class="input-text" placeholder="Enter your full name" autocomplete="name" required>
+              <div class="field-error">Please enter your full name.</div>
+            </div>
+
+            <!-- College Email -->
+            <div class="form-group" data-field-group="college-email">
+              <label class="form-label" for="college-email">
+                College Email <span class="label-required">*</span>
+              </label>
+              <input type="email" id="college-email" class="input-text" placeholder="Enter your official Amrita email" autocomplete="email" required>
+              <div class="field-error">Please enter your official Amrita college email ID.</div>
+            </div>
+
+            <!-- Personal Email -->
+            <div class="form-group" data-field-group="personal-email">
+              <label class="form-label" for="personal-email">
+                Personal Email <span class="label-required">*</span>
+              </label>
+              <input type="email" id="personal-email" class="input-text" placeholder="Enter your personal email" autocomplete="email" required>
+              <div class="field-error">Please enter a valid personal email address.</div>
+            </div>
+
+            <!-- Contact Number -->
+            <div class="form-group" data-field-group="contact-number">
+              <label class="form-label" for="contact-number">
+                Contact Number <span class="label-required">*</span>
+              </label>
+              <div class="input-phone-wrap">
+                <span class="phone-prefix">+91</span>
+                <input type="tel" id="contact-number" class="phone-field" placeholder="10-digit mobile number" maxlength="10" autocomplete="tel" required>
+              </div>
+              <div class="field-error">Please enter a valid 10-digit Indian mobile number.</div>
+
+              <!-- Same as Contact checkbox -->
+              <label class="checkbox-wrap">
+                <input type="checkbox" id="same-as-contact" class="custom-checkbox" checked>
+                <span class="checkbox-label">WhatsApp number is the same as contact number</span>
+              </label>
+            </div>
+
+            <!-- Separate WhatsApp Number (revealed if unchecked) -->
+            <div class="form-group" id="whatsapp-group" data-field-group="whatsapp-number" style="display: none;">
+              <label class="form-label" for="whatsapp-number">
+                WhatsApp Number <span class="label-required">*</span>
+              </label>
+              <div class="input-phone-wrap">
+                <span class="phone-prefix">+91</span>
+                <input type="tel" id="whatsapp-number" class="phone-field" placeholder="10-digit WhatsApp number" maxlength="10">
+              </div>
+              <div class="field-error">Please enter a valid 10-digit WhatsApp number.</div>
+            </div>
+          </div>
+
+          <!-- STEP 2: ACADEMIC IDENTITY -->
+          <div id="step-pane-2" class="step-pane">
+            <div class="step-pane-header">
+              <h3 class="step-pane-title">WHERE ARE YOU IN YOUR JOURNEY?</h3>
+              <p class="step-pane-desc">Select your current academic year of study.</p>
+            </div>
+
+            <!-- Year Cards (3 options only: 1st, 2nd, 3rd) -->
+            <div class="form-group" data-field-group="year-selection">
+              <label class="form-label">
+                Current Year of Study <span class="label-required">*</span>
+              </label>
+              <div class="selectable-grid grid-three-col">
+                <div class="selectable-card year-card" data-year="First Year">
+                  <div class="select-card-badge">YEAR 01</div>
+                  <div class="select-card-title">FIRST YEAR</div>
+                  <div class="select-card-desc">THE EXPLORER<br>"Discover. Experiment. Learn."</div>
+                </div>
+
+                <div class="selectable-card year-card" data-year="Second Year">
+                  <div class="select-card-badge">YEAR 02</div>
+                  <div class="select-card-title">SECOND YEAR</div>
+                  <div class="select-card-desc">THE BUILDER<br>"Learn. Create. Collaborate."</div>
+                </div>
+
+                <div class="selectable-card year-card" data-year="Third Year">
+                  <div class="select-card-badge">YEAR 03</div>
+                  <div class="select-card-title">THIRD YEAR</div>
+                  <div class="select-card-desc">THE ACCELERATOR<br>"Build. Lead. Deliver."</div>
+                </div>
+              </div>
+              <div class="field-error">Please select your year of study.</div>
+            </div>
+
+            <!-- Branch Cards (6 options) -->
+            <div class="form-group" data-field-group="branch-selection">
+              <label class="form-label">
+                Choose Your Branch <span class="label-required">*</span>
+              </label>
+              <div class="selectable-grid grid-two-col">
+                <div class="selectable-card branch-card" data-branch="CSE">
+                  <div class="select-card-title">CSE</div>
+                  <div class="select-card-desc">Computer Science and Engineering</div>
+                </div>
+
+                <div class="selectable-card branch-card" data-branch="AI">
+                  <div class="select-card-title">AI</div>
+                  <div class="select-card-desc">Artificial Intelligence</div>
+                </div>
+
+                <div class="selectable-card branch-card" data-branch="AIDS">
+                  <div class="select-card-title">AIDS</div>
+                  <div class="select-card-desc">Artificial Intelligence and Data Science</div>
+                </div>
+
+                <div class="selectable-card branch-card" data-branch="CCE">
+                  <div class="select-card-title">CCE</div>
+                  <div class="select-card-desc">Computer and Communication Engineering</div>
+                </div>
+
+                <div class="selectable-card branch-card" data-branch="ECE">
+                  <div class="select-card-title">ECE</div>
+                  <div class="select-card-desc">Electrical and Electronics Engineering</div>
+                </div>
+
+                <div class="selectable-card branch-card" data-branch="Quantum Computing">
+                  <div class="select-card-title">Quantum Computing</div>
+                  <div class="select-card-desc">Quantum Computing</div>
+                </div>
+              </div>
+              <div class="field-error">Please select your branch.</div>
+            </div>
+
+            <!-- Dynamic Section Selection -->
+            <div class="form-group" data-field-group="section-selection">
+              <label class="form-label">
+                Section <span class="label-required">*</span>
+              </label>
+              <div id="section-options-container" class="section-options-grid">
+                <span style="font-size: 0.85rem; color: var(--text-dim);">Please select your branch above first</span>
+              </div>
+              <div class="field-error">Please select your section.</div>
+            </div>
+          </div>
+
+          <!-- STEP 3: YOUR MISSION -->
+          <div id="step-pane-3" class="step-pane">
+            <div class="step-pane-header">
+              <h3 class="step-pane-title">WHAT DRIVES YOU?</h3>
+              <p class="step-pane-desc">What would you most like to explore through Agentblazer?</p>
+            </div>
+
+            <!-- Interests Chips (Max 3) -->
+            <div class="form-group" data-field-group="interests-selection">
+              <div class="interests-header-row">
+                <label class="form-label" style="margin-bottom: 0;">
+                  Focus Areas (Pick up to 3) <span class="label-required">*</span>
+                </label>
+                <span id="interests-counter" class="interest-counter-tag">0 / 3 SELECTED</span>
+              </div>
+              <div id="interests-container" class="interests-grid">
+                <!-- Dynamically populated from DOMAINS_LIST in script.js -->
+              </div>
+              <div class="field-error">Please select at least 1 interest (up to 3 max).</div>
+            </div>
+
+            <!-- Motivation -->
+            <div class="form-group" data-field-group="motivation-text">
+              <div class="form-label">
+                <span>Why do you want to join Agentblazer? <span class="label-required">*</span></span>
+                <span id="motivation-char-counter" class="char-counter">0 / 400</span>
+              </div>
+              <textarea id="motivation-text" class="input-textarea" placeholder="Tell us what you hope to learn, build or contribute..." maxlength="400" required></textarea>
+              <div class="field-error">Please share why you want to join Agentblazer (minimum 10 characters).</div>
+            </div>
+
+            <!-- Optional Creative Question -->
+            <div class="form-group">
+              <div class="form-label">
+                <span>If you could build one AI agent for Amrita, what would it do? <span class="text-dim text-xs">(Optional)</span></span>
+                <span id="ai-char-counter" class="char-counter">0 / 400</span>
+              </div>
+              <textarea id="ai-agent-idea" class="input-textarea" placeholder="Think about a problem students, faculty or the campus face..." maxlength="400"></textarea>
+            </div>
+
+            <!-- Final Declaration Checkbox -->
+            <div class="form-group" data-field-group="declaration-checkbox">
+              <label class="checkbox-wrap" style="align-items: flex-start; margin-top: 14px;">
+                <input type="checkbox" id="declaration-checkbox" class="custom-checkbox" style="margin-top: 3px;" required>
+                <span class="checkbox-label" style="line-height: 1.5; color: var(--text-body);">
+                  I confirm that the information provided by me is accurate and that I am a current student of Amrita Vishwa Vidyapeetham, Amaravati. <span class="label-required">*</span>
+                </span>
+              </label>
+              <div class="field-error">You must confirm this declaration to proceed.</div>
+            </div>
+          </div>
+
+          <!-- Wizard Footer Controls -->
+          <div class="wizard-footer-nav">
+            <button type="button" id="btn-back-step" class="btn-nav btn-back" disabled>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              <span>Back</span>
+            </button>
+
+            <button type="button" id="btn-next-step" class="btn-nav btn-next">
+              <span>Next Step</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+
+            <button type="submit" id="btn-submit-form" class="btn-submit" style="display: none;">
+              <span>ACTIVATE MY AGENT ⚡</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- SUCCESS SCREEN (Displayed after submission) -->
+      <div id="success-screen" class="success-screen">
+        <div class="success-badge-icon">
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+
+        <h2 class="success-title">⚡ AGENT ACTIVATED</h2>
+        <p class="success-subtitle">Welcome to Agentblazer.</p>
+
+        <p class="success-info-text">
+          Your registration has been successfully received and recorded in the club registry.
+        </p>
+
+        <div class="id-card-display">
+          <div class="id-label">YOUR REGISTRATION ID</div>
+          <div class="id-value-wrap">
+            <span id="display-reg-id" class="id-code">AB-AMR-0000</span>
+            <button type="button" id="btn-copy-id" class="btn-copy-id">Copy ID</button>
+          </div>
+        </div>
+
+        <p class="success-info-text">
+          Keep an eye on your official Amrita email and WhatsApp for further updates regarding onboarding and orientation.
+        </p>
+
+        <div class="next-mission-card">
+          <div class="next-mission-title">YOUR NEXT MISSION</div>
+          <div class="next-mission-quote">"Stay curious. Keep learning. Be ready to build."</div>
+        </div>
+
+        <button type="button" id="btn-reset-form" class="btn-primary" style="margin: 0 auto;">
+          <span>RETURN TO AGENTBLAZER</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand-col">
+          <div class="footer-brand-title">AGENTBLAZER</div>
+          <p class="footer-brand-desc">
+            Amrita Vishwa Vidyapeetham, Amaravati.<br>
+            A student technology community exploring Artificial Intelligence, autonomous agents, and hands-on innovation.
+          </p>
+        </div>
+
+        <div class="footer-links-col">
+          <ul class="footer-nav-list">
+            <li><strong style="color: var(--sf-blue-deep); font-size: 0.88rem;">Navigation</strong></li>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#domains">Domains</a></li>
+            <li><a href="#journey">Journey</a></li>
+            <li><a href="#registration">Register</a></li>
+          </ul>
+
+          <ul class="footer-nav-list">
+            <li><strong style="color: var(--sf-blue-deep); font-size: 0.88rem;">Campus & Pathways</strong></li>
+            <li><a href="https://amrita.edu/campus/amaravati/" target="_blank" rel="noopener noreferrer">Amrita Amaravati</a></li>
+            <li><a href="#about">AI Learning Days</a></li>
+            <li><a href="#journey">Agentforce Journey</a></li>
+            <li><a href="#why-join">Hackathons</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2026 Agentblazer · Amrita Vishwa Vidyapeetham, Amaravati. All rights reserved.
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <!-- Admin Portal Link (Leader Only) -->
+          <a href="admin.html" class="admin-roster-btn" style="text-decoration: none;" title="Admin & Coordinator Access to Member Registry">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <span>Admin Portal (Leaders Only)</span>
+          </a>
+
+          <!-- Direct CSV / Excel Export Button -->
+          <button type="button" id="admin-export-btn" class="admin-export-btn" title="Download roster as spreadsheet">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Export to Excel / CSV</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       ADMIN MEMBER ROSTER MODAL
+       ========================================================================== -->
+  <div id="admin-roster-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="modal-title-badge">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <div>
+            <h3 id="modal-title" class="modal-title">Agentblazer Member Registry</h3>
+            <span class="modal-subtitle">Amrita Vishwa Vidyapeetham, Amaravati · Intake Target: 125 Students</span>
+          </div>
+        </div>
+        <button type="button" id="modal-close-btn" class="modal-close-btn" aria-label="Close registry modal">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Storage Guide Info Box -->
+        <div class="storage-guide-box">
+          <div class="storage-guide-item">
+            <h4>Cloud Storage (Google Sheets)</h4>
+            <p>
+              When your Google Apps Script endpoint is configured in <code>script.js</code>, every registration is immediately appended to your online Google Sheet in real time.
+            </p>
+          </div>
+          <div class="storage-guide-item">
+            <h4>Browser Storage (Immediate Roster)</h4>
+            <p>
+              All submissions made through this browser are automatically stored in <code>localStorage</code> so you can view, search, and export them anytime without losing data.
+            </p>
+          </div>
+        </div>
+
+        <!-- Quota Progress Summary Cards -->
+        <div class="roster-stats-row">
+          <div class="roster-stat-card">
+            <div class="stat-card-label">Total Registered</div>
+            <div id="roster-total-count" class="stat-card-value">0</div>
+            <div class="stat-card-target">Intake Target: 125</div>
+          </div>
+          <div class="roster-stat-card">
+            <div class="stat-card-label">First Year</div>
+            <div id="roster-y1-count" class="stat-card-value">0</div>
+            <div class="stat-card-target">10% (~13 target)</div>
+          </div>
+          <div class="roster-stat-card">
+            <div class="stat-card-label">Second Year</div>
+            <div id="roster-y2-count" class="stat-card-value">0</div>
+            <div class="stat-card-target">20% (25 target)</div>
+          </div>
+          <div class="roster-stat-card">
+            <div class="stat-card-label">Third Year</div>
+            <div id="roster-y3-count" class="stat-card-value">0</div>
+            <div class="stat-card-target">70% (~87 target)</div>
+          </div>
+        </div>
+
+        <!-- Toolbar / Search / Filters -->
+        <div class="roster-toolbar">
+          <input type="text" id="roster-search-input" class="roster-search-input" placeholder="Search by name, ID (e.g. AB-AMR-), email, or branch...">
+          
+          <select id="roster-year-filter" class="roster-filter-select">
+            <option value="ALL">All Years</option>
+            <option value="First Year">First Year (10%)</option>
+            <option value="Second Year">Second Year (20%)</option>
+            <option value="Third Year">Third Year (70%)</option>
+          </select>
+
+          <select id="roster-branch-filter" class="roster-filter-select">
+            <option value="ALL">All Branches</option>
+            <option value="CSE">CSE</option>
+            <option value="AI">AI</option>
+            <option value="AIDS">AIDS</option>
+            <option value="CCE">CCE</option>
+            <option value="ECE">ECE</option>
+            <option value="Quantum Computing">Quantum</option>
+          </select>
+
+          <button type="button" id="btn-seed-sample" class="admin-export-btn" title="Add 3 realistic sample registrations to test the view">
+            + Add Sample Registrations
+          </button>
+        </div>
+
+        <!-- Table View -->
+        <div class="roster-table-wrapper">
+          <table class="roster-table">
+            <thead>
+              <tr>
+                <th>Registration ID</th>
+                <th>Full Name</th>
+                <th>Year</th>
+                <th>Branch & Section</th>
+                <th>College Email</th>
+                <th>Contact / WhatsApp</th>
+                <th>Interests</th>
+                <th>Registered At</th>
+              </tr>
+            </thead>
+            <tbody id="roster-table-body">
+              <tr>
+                <td colspan="8" class="empty-roster-msg">
+                  No registrations recorded yet. Register through the form or click "+ Add Sample Registrations" to preview!
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div style="font-size: 0.82rem; color: var(--text-dim);">
+          Tip: You can download the entire roster anytime as a spreadsheet.
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <button type="button" id="modal-export-btn" class="btn-primary" style="padding: 9px 18px; font-size: 0.88rem;">
+            Export Roster (.CSV / Excel)
+          </button>
+          <button type="button" id="modal-footer-close" class="btn-secondary" style="padding: 9px 18px; font-size: 0.88rem;">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vanilla Script Entry Point -->
+  <script type="module" src="/script.js"></script>
+</body>
+</html>

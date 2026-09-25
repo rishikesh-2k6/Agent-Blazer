@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Registry & Command Center | Agentblazer Amrita</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    /* Admin Portal Specific Custom Styles */
+    body {
+      background-color: #F8FAFD;
+      color: #1E293B;
+    }
+    .admin-navbar {
+      height: 70px;
+      background: #FFFFFF;
+      border-bottom: 1px solid #E2E8F0;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 2px 8px rgba(3, 45, 96, 0.04);
+    }
+    .admin-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 24px 20px;
+    }
+    .login-lock-card {
+      max-width: 440px;
+      margin: 100px auto 40px;
+      background: #FFFFFF;
+      border-radius: 16px;
+      padding: 36px;
+      border: 1px solid #D8E2EE;
+      box-shadow: 0 16px 40px rgba(3, 45, 96, 0.1);
+      text-align: center;
+    }
+    .metric-badge-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .metric-card {
+      background: #FFFFFF;
+      border: 1px solid #D8E2EE;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(3, 45, 96, 0.05);
+      position: relative;
+    }
+    .metric-card-kicker {
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #64748B;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .metric-card-num {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #032D60;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    .metric-target-info {
+      font-size: 0.8rem;
+      color: #0176D3;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .mini-progress-bar {
+      height: 6px;
+      background: #E2E8F0;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .mini-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #0176D3, #7F27FF);
+      border-radius: 999px;
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+    .admin-data-card {
+      background: #FFFFFF;
+      border: 1px solid #D8E2EE;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(3, 45, 96, 0.06);
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+    .table-toolbar-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid #E2E8F0;
+      background: #F8FAFD;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .table-search-box {
+      flex: 1;
+      min-width: 260px;
+      background: #FFFFFF;
+      border: 1.5px solid #CBD5E1;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 0.92rem;
+      color: #1E293B;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .table-search-box:focus {
+      border-color: #0176D3;
+    }
+    .filter-group {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .admin-select {
+      background: #FFFFFF;
+      border: 1.5px solid #CBD5E1;
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #032D60;
+      outline: none;
+      cursor: pointer;
+    }
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.88rem;
+    }
+    .admin-table th {
+      background: #F8FAFD;
+      padding: 14px 16px;
+      font-weight: 800;
+      color: #032D60;
+      border-bottom: 1.5px solid #D8E2EE;
+      white-space: nowrap;
+    }
+    .admin-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid #E2E8F0;
+      vertical-align: middle;
+    }
+    .admin-table tr:hover td {
+      background: #F0F6FD;
+    }
+    .btn-view-profile {
+      background: #EBF5FE;
+      color: #0176D3;
+      border: 1px solid rgba(1, 118, 211, 0.3);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-view-profile:hover {
+      background: #0176D3;
+      color: #FFFFFF;
+    }
+    /* Profile Details Drawer / Modal */
+    .profile-drawer-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 45, 96, 0.5);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .profile-drawer-overlay.active {
+      display: flex;
+    }
+    .profile-card-modal {
+      background: #FFFFFF;
+      border-radius: 16px;
+      max-width: 650px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 50px rgba(3, 45, 96, 0.2);
+      border: 1px solid #D8E2EE;
+      animation: modalPop 0.2s ease-out;
+    }
+    .profile-header {
+      padding: 24px;
+      background: #032D60;
+      color: #FFFFFF;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+    }
+    .profile-body {
+      padding: 24px;
+    }
+    .profile-grid-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+      background: #F8FAFD;
+      padding: 16px;
+      border-radius: 10px;
+      border: 1px solid #E2E8F0;
+    }
+    .profile-info-item label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #64748B;
+      display: block;
+      margin-bottom: 3px;
+    }
+    .profile-info-item span {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #032D60;
+    }
+    .qa-box {
+      margin-bottom: 18px;
+    }
+    .qa-box h5 {
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #0176D3;
+      margin-bottom: 6px;
+    }
+    .qa-box p {
+      background: #F8FAFD;
+      border-left: 3px solid #0176D3;
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.92rem;
+      color: #334155;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       1. ADMIN PASSKEY GATE (PROTECTION)
+       ========================================================================== -->
+  <div id="admin-auth-gate" class="admin-container">
+    <div class="login-lock-card">
+      <div style="width: 56px; height: 56px; border-radius: 50%; background: #EBF5FE; color: #0176D3; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+      </div>
+      <h2 style="font-size: 1.5rem; font-weight: 900; color: #032D60; margin-bottom: 8px;">Admin Roster Access</h2>
+      <p style="font-size: 0.88rem; color: #64748B; margin-bottom: 24px;">
+        Restricted to Agentblazer student leaders & faculty coordinators.
+      </p>
+
+      <form id="admin-passcode-form">
+        <div style="margin-bottom: 16px; text-align: left; position: relative;">
+          <label style="font-size: 0.8rem; font-weight: 700; color: #032D60; display: block; margin-bottom: 6px;" for="admin-passkey-input">Organizer Passkey</label>
+          <div style="position: relative; display: flex; align-items: center;">
+            <input type="password" id="admin-passkey-input" class="input-text" placeholder="Enter administrator password" autocomplete="current-password" required style="width: 100%; padding-right: 42px;">
+            <button type="button" id="btn-toggle-pass" style="position: absolute; right: 10px; background: none; border: none; cursor: pointer; color: #64748B; padding: 4px;" aria-label="Toggle password visibility">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+          <div id="auth-error-msg" style="display: none; font-size: 0.8rem; color: #DC2626; margin-top: 6px; font-weight: 600;">Incorrect passkey. Access denied.</div>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-bottom: 16px;">
+          <span>Unlock Member Registry</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </form>
+
+      <div style="margin-top: 20px;">
+        <a href="index.html" style="font-size: 0.85rem; color: #0176D3; text-decoration: none; font-weight: 600;">← Return to Public Registration</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       2. MAIN ADMIN DASHBOARD & ROSTER (UNLOCKED)
+       ========================================================================== -->
+  <div id="admin-dashboard-view" style="display: none;">
+    <!-- Admin Sticky Navbar -->
+    <header class="admin-navbar">
+      <div class="admin-container" style="display: flex; align-items: center; justify-content: space-between; height: 100%; padding-top: 0; padding-bottom: 0;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <img src="/assets/agentblazer_insignia_1790334143628.jpg" alt="Agentblazer Emblem" style="width: 38px; height: 38px; border-radius: 8px; object-fit: cover;" onerror="this.src='./assets/agentblazer_insignia_1790334143628.jpg'">
+          <div>
+            <span style="font-size: 1.15rem; font-weight: 900; color: #032D60;">AGENTBLAZER <span style="font-size: 0.75rem; background: #0176D3; color: #FFF; padding: 2px 8px; border-radius: 4px; margin-left: 6px;">ADMIN</span></span>
+            <div style="font-size: 0.72rem; color: #64748B; font-weight: 600;">Amrita Vishwa Vidyapeetham · Amaravati</div>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <a href="index.html" class="btn-secondary" style="padding: 8px 16px; font-size: 0.85rem;">
+            <span>Public Site ↗</span>
+          </a>
+          <button type="button" id="btn-admin-logout" class="admin-export-btn" style="padding: 8px 14px; font-size: 0.85rem; color: #DC2626;">
+            Log Out
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="admin-container">
+      <!-- Title & Live Status -->
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;">
+        <div>
+          <span class="section-kicker">APPLICANT REGISTRY & INTAKE ANALYTICS</span>
+          <h1 style="font-size: 1.85rem; font-weight: 900; color: #032D60;">Registered Student Members</h1>
+          <p style="font-size: 0.92rem; color: #64748B;">Complete submissions captured via the Agentblazer onboarding portal.</p>
+        </div>
+
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button type="button" id="btn-add-student-modal" class="btn-primary" style="padding: 10px 18px; font-size: 0.9rem; background: #059669; border-color: #059669;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <span>+ Add Student</span>
+          </button>
+          <button type="button" id="btn-copy-all-emails" class="btn-secondary" style="padding: 10px 16px; font-size: 0.9rem;">
+            <span>📋 Copy Emails</span>
+          </button>
+          <button type="button" id="btn-export-csv" class="btn-primary" style="padding: 10px 20px; font-size: 0.9rem;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            <span>Download Excel (.CSV)</span>
+          </button>
+          <button type="button" id="btn-print-table" class="btn-secondary" style="padding: 10px 18px; font-size: 0.9rem;">
+            <span>Print / PDF</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Intake Quota Cards (Target = 125) -->
+      <div class="metric-badge-grid">
+        <!-- Total -->
+        <div class="metric-card">
+          <div class="metric-card-kicker">Total Applicants</div>
+          <div id="dash-total-count" class="metric-card-num">0</div>
+          <div class="metric-target-info">
+            <span>Intake Target: 125</span>
+            <span id="dash-total-pct">0%</span>
+          </div>
+          <div class="mini-progress-bar">
+            <div id="dash-total-bar" class="mini-progress-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <!-- 1st Year -->
+        <div class="metric-card">
+          <div class="metric-card-kicker">First Year (Explorer)</div>
+          <div id="dash-y1-count" class="metric-card-num">0</div>
+          <div class="metric-target-info">
+            <span>Target: 13 (10%)</span>
+            <span id="dash-y1-pct">0%</span>
+          </div>
+          <div class="mini-progress-bar">
+            <div id="dash-y1-bar" class="mini-progress-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <!-- 2nd Year -->
+        <div class="metric-card">
+          <div class="metric-card-kicker">Second Year (Builder)</div>
+          <div id="dash-y2-count" class="metric-card-num">0</div>
+          <div class="metric-target-info">
+            <span>Target: 25 (20%)</span>
+            <span id="dash-y2-pct">0%</span>
+          </div>
+          <div class="mini-progress-bar">
+            <div id="dash-y2-bar" class="mini-progress-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <!-- 3rd Year -->
+        <div class="metric-card">
+          <div class="metric-card-kicker">Third Year (Accelerator)</div>
+          <div id="dash-y3-count" class="metric-card-num">0</div>
+          <div class="metric-target-info">
+            <span>Target: 87 (70%)</span>
+            <span id="dash-y3-pct">0%</span>
+          </div>
+          <div class="mini-progress-bar">
+            <div id="dash-y3-bar" class="mini-progress-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Complete Roster Table Card -->
+      <div class="admin-data-card">
+        <!-- Toolbar Filters -->
+        <div class="table-toolbar-header">
+          <input type="text" id="admin-search-input" class="table-search-box" placeholder="🔍 Search by student name, ID (AB-AMR-), email, or mobile...">
+          
+          <div class="filter-group">
+            <select id="admin-filter-year" class="admin-select">
+              <option value="ALL">All Academic Years</option>
+              <option value="First Year">First Year (Explorer)</option>
+              <option value="Second Year">Second Year (Builder)</option>
+              <option value="Third Year">Third Year (Accelerator)</option>
+            </select>
+
+            <select id="admin-filter-branch" class="admin-select">
+              <option value="ALL">All Branches</option>
+              <option value="CSE">CSE (Computer Science)</option>
+              <option value="AI">AI (Artificial Intelligence)</option>
+              <option value="AIDS">AIDS (AI & Data Science)</option>
+              <option value="CCE">CCE (Computer & Comm)</option>
+              <option value="ECE">ECE (Electronics)</option>
+              <option value="Quantum Computing">Quantum Computing</option>
+            </select>
+
+            <select id="admin-filter-status" class="admin-select">
+              <option value="ALL">All Intake Statuses</option>
+              <option value="Selected">Selected (Target 125)</option>
+              <option value="Shortlisted">Shortlisted</option>
+              <option value="Under Review">Under Review</option>
+              <option value="Waitlisted">Waitlisted</option>
+            </select>
+
+            <select id="admin-sort-select" class="admin-select">
+              <option value="newest">Newest Submissions First</option>
+              <option value="oldest">Oldest Submissions First</option>
+              <option value="name_asc">Name (A → Z)</option>
+              <option value="reg_id">Registration ID</option>
+            </select>
+
+            <button type="button" id="admin-btn-seed-sample" class="admin-export-btn" title="Add 3 realistic sample records to preview the dashboard">
+              + Seed Demo Data
+            </button>
+
+            <button type="button" id="admin-btn-clear-all" class="admin-export-btn" style="color: #DC2626;" title="Clear all local data">
+              Clear All
+            </button>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div style="overflow-x: auto;">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Registration ID</th>
+                <th>Full Name</th>
+                <th>Year</th>
+                <th>Branch & Section</th>
+                <th>Amrita Email</th>
+                <th>Contact</th>
+                <th>Intake Status</th>
+                <th>Top Interests</th>
+                <th>Submitted</th>
+                <th style="text-align: right;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="admin-table-body">
+              <!-- Rendered via JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+  </div>
+
+  <!-- ==========================================================================
+       3. STUDENT DOSSIER / PROFILE MODAL (CLICK ON STUDENT)
+       ========================================================================== -->
+  <div id="profile-modal-overlay" class="profile-drawer-overlay">
+    <div class="profile-card-modal">
+      <div class="profile-header">
+        <div>
+          <span id="prof-modal-regid" style="font-family: var(--font-mono); font-size: 0.85rem; background: rgba(255, 255, 255, 0.15); padding: 4px 10px; border-radius: 4px;">AB-AMR-0000</span>
+          <h3 id="prof-modal-name" style="font-size: 1.5rem; font-weight: 900; margin-top: 8px;">Student Name</h3>
+          <span id="prof-modal-sub" style="font-size: 0.88rem; color: #93C5FD;">Year · Branch · Section</span>
+        </div>
+        <button type="button" id="btn-close-prof-modal" style="background: transparent; border: none; color: #FFFFFF; font-size: 1.5rem; cursor: pointer;">✕</button>
+      </div>
+
+      <div class="profile-body">
+        <div class="profile-grid-info">
+          <div class="profile-info-item">
+            <label>Official Amrita Email</label>
+            <span id="prof-modal-col-email">email@amrita.edu</span>
+          </div>
+          <div class="profile-info-item">
+            <label>Personal Email</label>
+            <span id="prof-modal-per-email">email@gmail.com</span>
+          </div>
+          <div class="profile-info-item">
+            <label>Contact Number</label>
+            <span id="prof-modal-phone">+91 0000000000</span>
+          </div>
+          <div class="profile-info-item">
+            <label>WhatsApp Number</label>
+            <span id="prof-modal-whatsapp">+91 0000000000</span>
+          </div>
+        </div>
+
+        <div class="qa-box">
+          <h5>Selected Domains & Interests</h5>
+          <div id="prof-modal-interests" style="display: flex; gap: 6px; flex-wrap: wrap;"></div>
+        </div>
+
+        <div class="qa-box">
+          <h5>Why do you want to join Agentblazer?</h5>
+          <p id="prof-modal-motivation">Motivation text...</p>
+        </div>
+
+        <div class="qa-box">
+          <h5>Campus AI Agent Idea</h5>
+          <p id="prof-modal-idea">AI Agent idea...</p>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #E2E8F0; padding-top: 16px;">
+          <span id="prof-modal-timestamp" style="font-size: 0.78rem; color: #64748B;">Registered: 2026</span>
+          <a id="prof-modal-wa-btn" href="#" target="_blank" class="btn-primary" style="padding: 8px 16px; font-size: 0.85rem; background: #059669; text-decoration: none;">
+            💬 Open WhatsApp Chat
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       4. ADD STUDENT MANUALLY MODAL
+       ========================================================================== -->
+  <div id="add-student-modal-overlay" class="profile-drawer-overlay">
+    <div class="profile-card-modal" style="max-width: 600px;">
+      <div class="profile-header" style="background: #059669;">
+        <div>
+          <span style="font-size: 0.8rem; background: rgba(255, 255, 255, 0.2); padding: 3px 8px; border-radius: 4px; font-weight: 700;">MANUAL ENROLLMENT</span>
+          <h3 style="font-size: 1.35rem; font-weight: 900; margin-top: 6px;">Add Student to Registry</h3>
+          <p style="font-size: 0.82rem; color: #D1FAE5; margin: 0;">Enroll walk-in or offline applicant directly into Agentblazer records.</p>
+        </div>
+        <button type="button" id="btn-close-add-modal" style="background: transparent; border: none; color: #FFFFFF; font-size: 1.5rem; cursor: pointer;">✕</button>
+      </div>
+
+      <form id="add-student-form" class="profile-body">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+          <div>
+            <label style="font-size: 0.78rem; font-weight: 700; color: #032D60; display: block; margin-bottom: 4px;" for="manual-name">Full Name *</label>
+            <input type="text" id="manual-name" required class="input-text" placeholder="e.g. Rahul Nair" style="width: 100%; padding: 8px 12px; font-size: 0.88rem;">
+          </div>
+          <div>
+            <label style="font-size: 0.78rem; font-weight: 700; color: #032D60; display: block; margin-bottom: 4px;" for="manual-col-email">Amrita Email *</label>
+            <input type="email" id="manual-col-email" required class="input-text" placeholder="name@am.students.amrita.edu" style="width: 100%; padding: 8px 12px; font-size: 0.88rem;">
+          </div>
+          <div>
+            <label style="font-size: 0.78rem; font-weight: 700; color: #032D60; display: block; margin-bottom: 4px;" for="manual-per-email">Personal Email</label>
+            <input type="email" id="manual-per-email" class="input-text" placeholder="personal@gmail.com" style="width: 100%; padding: 8px 12px; font-size: 0.88rem;">
+          </div>
+          <div>
+            <label style="font-size: 0.78rem; font-weight: 700; color: #032D60; display: block; margin-bottom: 4px;" for="manual-phone">Mobile Number *</label>
+            <input type="tel" id="manual-phone" required class="input-text" placeholder="10-digit mobile" style="width: 100%; padding: 8px 12px; font-size: 0.88rem;">
+          </div>
+          <div>
+            <label style="font-size: 0.78rem; font-weight: 700; color: #032D60; display: block; margin-bottom: 4px;" for="manual-year">Academic Year *</label>
+            <select id="manual-year" required class="admin-select" style="width: 100%;">
+              <option value="Third Year">Third Year (70% Quota)</option>
+              <option value="Second Year">Second Year (20% Quota)</option>
+              <option value="First Year">First Year (10% Quota)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size: 0.78rem; font-weight: 700; color: #032D60; display: block; margin-bottom: 4px;" for="manual-branch">Branch *</label>
+            <select id="manual-branch" required class="admin-select" style="width: 100%;">
+              <option value="CSE">CSE</option>
+              <option value="AI">AI</option>
+              <option value="AIDS">AIDS</option>
+              <option value="CCE">CCE</option>
+              <option value="ECE">ECE</option>
+              <option value="Quantum Computing">Quantum Computing</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 14px;">
+          <label style="font-size: 0.78rem; font-weight: 700; color: #032D60; display: block; margin-bottom: 4px;" for="manual-section">Section</label>
+          <input type="text" id="manual-section" class="input-text" placeholder="e.g. A, B, C, or N/A" style="width: 100%; padding: 8px 12px; font-size: 0.88rem;">
+        </div>
+
+        <div style="margin-bottom: 14px;">
+          <label style="font-size: 0.78rem; font-weight: 700; color: #032D60; display: block; margin-bottom: 4px;" for="manual-motivation">Why Agentblazer / Motivation</label>
+          <textarea id="manual-motivation" rows="2" class="input-text" placeholder="Brief statement..." style="width: 100%; padding: 8px 12px; font-size: 0.88rem;"></textarea>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 10px; border-top: 1px solid #E2E8F0; padding-top: 14px;">
+          <button type="button" id="btn-cancel-add" class="btn-secondary" style="padding: 8px 16px;">Cancel</button>
+          <button type="submit" class="btn-primary" style="padding: 8px 20px; background: #059669; border-color: #059669;">Save to Roster</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="admin-toast" style="display: none; position: fixed; bottom: 24px; right: 24px; background: #032D60; color: #FFFFFF; padding: 12px 20px; border-radius: 8px; font-size: 0.88rem; font-weight: 600; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 999;">
+    Notification
+  </div>
+
+  <!-- Script for Admin Page -->
+  <script>
+    // Cryptographic SHA-256 hash of the administrative passkey.
+    // The plaintext password NEVER appears in source code or client bundles.
+    const ADMIN_PASSKEY_HASH = "0a03ea8cd531cb0c1d0ad0070438de55d05f78f690b964e5f9e9c278038a3a1c";
+    const STORAGE_KEY = "agentblazer_registrations";
+
+    // Web Crypto API standard SHA-256 hashing function
+    async function hashString(str) {
+      const msgBuffer = new TextEncoder().encode(str);
+      const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      checkAuthStatus();
+      initAuthForm();
+      initDashboardControls();
+      initAddStudentModal();
+      initCopyEmails();
+    });
+
+    function showToast(message) {
+      const toast = document.getElementById("admin-toast");
+      if (!toast) return;
+      toast.textContent = message;
+      toast.style.display = "block";
+      setTimeout(() => {
+        toast.style.display = "none";
+      }, 3000);
+    }
+
+    function checkAuthStatus() {
+      const isAuth = sessionStorage.getItem("ab_admin_authenticated") === "true";
+      const gate = document.getElementById("admin-auth-gate");
+      const dash = document.getElementById("admin-dashboard-view");
+
+      if (isAuth) {
+        if (gate) gate.style.display = "none";
+        if (dash) dash.style.display = "block";
+        loadRosterData();
+      } else {
+        if (gate) gate.style.display = "block";
+        if (dash) dash.style.display = "none";
+      }
+    }
+
+    function initAuthForm() {
+      const form = document.getElementById("admin-passcode-form");
+      const passInput = document.getElementById("admin-passkey-input");
+      const toggleBtn = document.getElementById("btn-toggle-pass");
+      const errBox = document.getElementById("auth-error-msg");
+      const logoutBtn = document.getElementById("btn-admin-logout");
+
+      // Password visibility toggle
+      if (toggleBtn && passInput) {
+        toggleBtn.addEventListener("click", () => {
+          const isPassword = passInput.type === "password";
+          passInput.type = isPassword ? "text" : "password";
+          toggleBtn.style.color = isPassword ? "#0176D3" : "#64748B";
+        });
+      }
+
+      if (form && passInput) {
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const entered = passInput.value.trim();
+          const enteredHash = await hashString(entered);
+          
+          if (enteredHash === ADMIN_PASSKEY_HASH) {
+            sessionStorage.setItem("ab_admin_authenticated", "true");
+            if (errBox) errBox.style.display = "none";
+            passInput.value = "";
+            checkAuthStatus();
+          } else {
+            if (errBox) {
+              errBox.style.display = "block";
+              passInput.focus();
+              passInput.select();
+            }
+          }
+        });
+      }
+
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+          sessionStorage.removeItem("ab_admin_authenticated");
+          checkAuthStatus();
+        });
+      }
+    }
+
+    function initDashboardControls() {
+      const search = document.getElementById("admin-search-input");
+      const filterYear = document.getElementById("admin-filter-year");
+      const filterBranch = document.getElementById("admin-filter-branch");
+      const filterStatus = document.getElementById("admin-filter-status");
+      const sortSelect = document.getElementById("admin-sort-select");
+      const exportBtn = document.getElementById("btn-export-csv");
+      const printBtn = document.getElementById("btn-print-table");
+      const seedBtn = document.getElementById("admin-btn-seed-sample");
+      const clearBtn = document.getElementById("admin-btn-clear-all");
+      const closeProfModal = document.getElementById("btn-close-prof-modal");
+      const profModalOverlay = document.getElementById("profile-modal-overlay");
+
+      if (search) search.addEventListener("input", loadRosterData);
+      if (filterYear) filterYear.addEventListener("change", loadRosterData);
+      if (filterBranch) filterBranch.addEventListener("change", loadRosterData);
+      if (filterStatus) filterStatus.addEventListener("change", loadRosterData);
+      if (sortSelect) sortSelect.addEventListener("change", loadRosterData);
+
+      if (exportBtn) exportBtn.addEventListener("click", exportRosterCSV);
+      if (printBtn) printBtn.addEventListener("click", () => window.print());
+
+      if (seedBtn) {
+        seedBtn.addEventListener("click", () => {
+          seedSampleData();
+          loadRosterData();
+          showToast("Added 3 demo applicants to registry.");
+        });
+      }
+
+      if (clearBtn) {
+        clearBtn.addEventListener("click", () => {
+          if (confirm("Are you sure you want to clear the locally stored registrations? This action cannot be undone.")) {
+            localStorage.removeItem(STORAGE_KEY);
+            loadRosterData();
+            showToast("Local records cleared.");
+          }
+        });
+      }
+
+      if (closeProfModal) {
+        closeProfModal.addEventListener("click", () => {
+          profModalOverlay.classList.remove("active");
+        });
+      }
+
+      if (profModalOverlay) {
+        profModalOverlay.addEventListener("click", (e) => {
+          if (e.target === profModalOverlay) {
+            profModalOverlay.classList.remove("active");
+          }
+        });
+      }
+    }
+
+    function initAddStudentModal() {
+      const modal = document.getElementById("add-student-modal-overlay");
+      const openBtn = document.getElementById("btn-add-student-modal");
+      const closeBtn = document.getElementById("btn-close-add-modal");
+      const cancelBtn = document.getElementById("btn-cancel-add");
+      const form = document.getElementById("add-student-form");
+
+      if (!modal || !openBtn) return;
+
+      const openModal = () => modal.classList.add("active");
+      const closeModal = () => {
+        modal.classList.remove("active");
+        if (form) form.reset();
+      };
+
+      openBtn.addEventListener("click", openModal);
+      if (closeBtn) closeBtn.addEventListener("click", closeModal);
+      if (cancelBtn) cancelBtn.addEventListener("click", closeModal);
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+      });
+
+      if (form) {
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const fullName = document.getElementById("manual-name").value.trim();
+          const collegeEmail = document.getElementById("manual-col-email").value.trim();
+          const personalEmail = document.getElementById("manual-per-email").value.trim();
+          const contactNumber = document.getElementById("manual-phone").value.trim();
+          const year = document.getElementById("manual-year").value;
+          const branch = document.getElementById("manual-branch").value;
+          const section = document.getElementById("manual-section").value.trim() || "N/A";
+          const motivation = document.getElementById("manual-motivation").value.trim();
+
+          const newStudent = {
+            timestamp: new Date().toISOString(),
+            registrationId: `AB-AMR-${Math.floor(1000 + Math.random() * 9000)}`,
+            fullName,
+            collegeEmail,
+            personalEmail,
+            contactNumber,
+            whatsappNumber: contactNumber,
+            year,
+            branch,
+            section,
+            interests: ["AI & AGENTIC AI", "AGENTFORCE"],
+            motivation: motivation || "Manual offline enrollment by coordinator.",
+            aiAgentIdea: "Enrolled in person during orientation.",
+            status: "Selected"
+          };
+
+          const existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+          existing.unshift(newStudent);
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
+
+          closeModal();
+          loadRosterData();
+          showToast(`Student ${fullName} (${newStudent.registrationId}) added!`);
+        });
+      }
+    }
+
+    function initCopyEmails() {
+      const copyBtn = document.getElementById("btn-copy-all-emails");
+      if (!copyBtn) return;
+
+      copyBtn.addEventListener("click", () => {
+        const records = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+        if (records.length === 0) {
+          alert("No registered students found.");
+          return;
+        }
+
+        const emails = records
+          .map(r => r.collegeEmail || r.personalEmail)
+          .filter(Boolean)
+          .join(", ");
+
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(emails).then(() => {
+            showToast(`Copied ${records.length} emails to clipboard!`);
+          }).catch(() => {
+            prompt("Copy student emails:", emails);
+          });
+        } else {
+          prompt("Copy student emails:", emails);
+        }
+      });
+    }
+
+    function loadRosterData() {
+      const allRecords = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      updateMetrics(allRecords);
+
+      const tableBody = document.getElementById("admin-table-body");
+      if (!tableBody) return;
+
+      const searchVal = (document.getElementById("admin-search-input")?.value || "").toLowerCase().trim();
+      const yearVal = document.getElementById("admin-filter-year")?.value || "ALL";
+      const branchVal = document.getElementById("admin-filter-branch")?.value || "ALL";
+      const statusVal = document.getElementById("admin-filter-status")?.value || "ALL";
+      const sortVal = document.getElementById("admin-sort-select")?.value || "newest";
+
+      // Filter
+      let filtered = allRecords.filter(rec => {
+        const searchMatch = !searchVal || 
+          (rec.fullName && rec.fullName.toLowerCase().includes(searchVal)) ||
+          (rec.registrationId && rec.registrationId.toLowerCase().includes(searchVal)) ||
+          (rec.collegeEmail && rec.collegeEmail.toLowerCase().includes(searchVal)) ||
+          (rec.contactNumber && rec.contactNumber.includes(searchVal)) ||
+          (rec.branch && rec.branch.toLowerCase().includes(searchVal));
+
+        const yearMatch = yearVal === "ALL" || rec.year === yearVal;
+        const branchMatch = branchVal === "ALL" || rec.branch === branchVal;
+        const recStatus = rec.status || "Under Review";
+        const statusMatch = statusVal === "ALL" || recStatus === statusVal;
+
+        return searchMatch && yearMatch && branchMatch && statusMatch;
+      });
+
+      // Sort
+      filtered.sort((a, b) => {
+        if (sortVal === "newest") return new Date(b.timestamp || 0) - new Date(a.timestamp || 0);
+        if (sortVal === "oldest") return new Date(a.timestamp || 0) - new Date(b.timestamp || 0);
+        if (sortVal === "name_asc") return (a.fullName || "").localeCompare(b.fullName || "");
+        if (sortVal === "reg_id") return (a.registrationId || "").localeCompare(b.registrationId || "");
+        return 0;
+      });
+
+      if (filtered.length === 0) {
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="10" style="text-align: center; padding: 48px 20px; color: #64748B;">
+              ${allRecords.length === 0 ? "No student registrations found yet. Share the registration link or click '+ Seed Demo Data' to preview!" : "No records match your active search filters."}
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tableBody.innerHTML = filtered.map((rec) => {
+        const dateStr = rec.timestamp ? new Date(rec.timestamp).toLocaleString("en-IN", { dateStyle: "short", timeStyle: "short" }) : "Recent";
+        const interests = Array.isArray(rec.interests) ? rec.interests : (rec.interests || "").split(", ");
+        const interestPills = interests.slice(0, 2).map(i => `<span style="font-size: 0.72rem; background: #F1F5F9; color: #475569; padding: 2px 6px; border-radius: 4px; font-weight: 600;">${i.trim()}</span>`).join(" ");
+        const currentStatus = rec.status || "Under Review";
+
+        const statusColors = {
+          "Selected": "background: #DCFCE7; color: #15803D; border: 1px solid #86EFAC;",
+          "Shortlisted": "background: #E0E7FF; color: #4338CA; border: 1px solid #A5B4FC;",
+          "Under Review": "background: #FEF3C7; color: #B45309; border: 1px solid #FDE68A;",
+          "Waitlisted": "background: #F1F5F9; color: #64748B; border: 1px solid #CBD5E1;"
+        };
+
+        return `
+          <tr>
+            <td><span style="font-family: var(--font-mono); font-weight: 800; color: #0176D3; background: #EBF5FE; padding: 3px 8px; border-radius: 4px;">${rec.registrationId || "N/A"}</span></td>
+            <td><strong>${escapeHtml(rec.fullName || "")}</strong></td>
+            <td><span style="font-weight: 700; color: #032D60;">${escapeHtml(rec.year || "")}</span></td>
+            <td><strong>${escapeHtml(rec.branch || "")}</strong> (Sec ${escapeHtml(rec.section || "N/A")})</td>
+            <td><a href="mailto:${escapeHtml(rec.collegeEmail)}" style="color: #0176D3; text-decoration: none;">${escapeHtml(rec.collegeEmail || "")}</a></td>
+            <td>
+              <div style="font-weight: 600; color: #1E293B;">+91 ${escapeHtml(rec.contactNumber || "")}</div>
+              <a href="https://wa.me/91${(rec.whatsappNumber || rec.contactNumber || '').replace(/\D/g, '')}" target="_blank" style="font-size: 0.75rem; color: #059669; text-decoration: none; font-weight: 700;">💬 WhatsApp</a>
+            </td>
+            <td>
+              <select onchange="updateStudentStatus('${rec.registrationId}', this.value)" style="font-size: 0.78rem; font-weight: 700; padding: 4px 8px; border-radius: 6px; cursor: pointer; outline: none; ${statusColors[currentStatus] || statusColors['Under Review']}">
+                <option value="Selected" ${currentStatus === 'Selected' ? 'selected' : ''}>Selected (125)</option>
+                <option value="Shortlisted" ${currentStatus === 'Shortlisted' ? 'selected' : ''}>Shortlisted</option>
+                <option value="Under Review" ${currentStatus === 'Under Review' ? 'selected' : ''}>Under Review</option>
+                <option value="Waitlisted" ${currentStatus === 'Waitlisted' ? 'selected' : ''}>Waitlisted</option>
+              </select>
+            </td>
+            <td><div style="display: flex; gap: 4px; flex-wrap: wrap;">${interestPills}</div></td>
+            <td style="font-size: 0.8rem; color: #64748B; white-space: nowrap;">${dateStr}</td>
+            <td style="text-align: right; white-space: nowrap;">
+              <button type="button" class="btn-view-profile" onclick="openStudentModal('${rec.registrationId}')" style="margin-right: 4px;">
+                Dossier
+              </button>
+              <button type="button" onclick="deleteStudent('${rec.registrationId}', '${escapeHtml(rec.fullName)}')" style="background: #FEE2E2; color: #DC2626; border: 1px solid #FECACA; padding: 6px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;" title="Remove this record">
+                ✕
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    window.updateStudentStatus = function(regId, newStatus) {
+      const records = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      const student = records.find(r => r.registrationId === regId);
+      if (student) {
+        student.status = newStatus;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+        loadRosterData();
+        showToast(`Status updated to "${newStatus}" for ${student.fullName}`);
+      }
+    };
+
+    window.deleteStudent = function(regId, name) {
+      if (confirm(`Are you sure you want to remove ${name} (${regId}) from the roster?`)) {
+        let records = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+        records = records.filter(r => r.registrationId !== regId);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+        loadRosterData();
+        showToast(`Removed ${name} from registry.`);
+      }
+    };
+
+    function updateMetrics(records) {
+      const total = records.length;
+      const y1 = records.filter(r => r.year === "First Year").length;
+      const y2 = records.filter(r => r.year === "Second Year").length;
+      const y3 = records.filter(r => r.year === "Third Year").length;
+
+      document.getElementById("dash-total-count").textContent = total;
+      document.getElementById("dash-total-pct").textContent = Math.round((total / 125) * 100) + "%";
+      document.getElementById("dash-total-bar").style.width = Math.min(100, Math.round((total / 125) * 100)) + "%";
+
+      document.getElementById("dash-y1-count").textContent = y1;
+      document.getElementById("dash-y1-pct").textContent = Math.round((y1 / 13) * 100) + "% of quota";
+      document.getElementById("dash-y1-bar").style.width = Math.min(100, Math.round((y1 / 13) * 100)) + "%";
+
+      document.getElementById("dash-y2-count").textContent = y2;
+      document.getElementById("dash-y2-pct").textContent = Math.round((y2 / 25) * 100) + "% of quota";
+      document.getElementById("dash-y2-bar").style.width = Math.min(100, Math.round((y2 / 25) * 100)) + "%";
+
+      document.getElementById("dash-y3-count").textContent = y3;
+      document.getElementById("dash-y3-pct").textContent = Math.round((y3 / 87) * 100) + "% of quota";
+      document.getElementById("dash-y3-bar").style.width = Math.min(100, Math.round((y3 / 87) * 100)) + "%";
+    }
+
+    window.openStudentModal = function(regId) {
+      const allRecords = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      const student = allRecords.find(r => r.registrationId === regId);
+      if (!student) return;
+
+      document.getElementById("prof-modal-regid").textContent = student.registrationId;
+      document.getElementById("prof-modal-name").textContent = student.fullName;
+      document.getElementById("prof-modal-sub").textContent = `${student.year} · ${student.branch} (Section ${student.section || "N/A"})`;
+      document.getElementById("prof-modal-col-email").textContent = student.collegeEmail;
+      document.getElementById("prof-modal-per-email").textContent = student.personalEmail || "N/A";
+      document.getElementById("prof-modal-phone").textContent = `+91 ${student.contactNumber}`;
+      document.getElementById("prof-modal-whatsapp").textContent = `+91 ${student.whatsappNumber || student.contactNumber}`;
+      document.getElementById("prof-modal-motivation").textContent = student.motivation || "No motivation statement provided.";
+      document.getElementById("prof-modal-idea").textContent = student.aiAgentIdea || "None submitted.";
+      document.getElementById("prof-modal-timestamp").textContent = `Registered: ${new Date(student.timestamp || Date.now()).toLocaleString("en-IN")}`;
+
+      const waBtn = document.getElementById("prof-modal-wa-btn");
+      if (waBtn) {
+        const cleanPhone = (student.whatsappNumber || student.contactNumber || "").replace(/\D/g, "");
+        waBtn.href = `https://wa.me/91${cleanPhone}?text=Hello%20${encodeURIComponent(student.fullName)},%20this%20is%20Agentblazer%20at%20Amrita%20Amaravati!`;
+      }
+
+      const interestsContainer = document.getElementById("prof-modal-interests");
+      const interests = Array.isArray(student.interests) ? student.interests : (student.interests || "").split(", ");
+      interestsContainer.innerHTML = interests.map(i => `<span style="font-size: 0.78rem; background: #EBF5FE; color: #0176D3; padding: 4px 10px; border-radius: 6px; font-weight: 700;">${i.trim()}</span>`).join("");
+
+      document.getElementById("profile-modal-overlay").classList.add("active");
+    };
+
+    function exportRosterCSV() {
+      const records = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      if (records.length === 0) {
+        alert("No registrations recorded yet.");
+        return;
+      }
+
+      const headers = [
+        "Timestamp",
+        "Registration ID",
+        "Full Name",
+        "College Email",
+        "Personal Email",
+        "Contact Number",
+        "WhatsApp Number",
+        "Year",
+        "Branch",
+        "Section",
+        "Status",
+        "Interests",
+        "Why Agentblazer",
+        "AI Agent Idea"
+      ];
+
+      const csvRows = [headers.join(",")];
+      records.forEach(row => {
+        const values = [
+          `"${(row.timestamp || "").replace(/"/g, '""')}"`,
+          `"${(row.registrationId || "").replace(/"/g, '""')}"`,
+          `"${(row.fullName || "").replace(/"/g, '""')}"`,
+          `"${(row.collegeEmail || "").replace(/"/g, '""')}"`,
+          `"${(row.personalEmail || "").replace(/"/g, '""')}"`,
+          `"${(row.contactNumber || "").replace(/"/g, '""')}"`,
+          `"${(row.whatsappNumber || "").replace(/"/g, '""')}"`,
+          `"${(row.year || "").replace(/"/g, '""')}"`,
+          `"${(row.branch || "").replace(/"/g, '""')}"`,
+          `"${(row.section || "").replace(/"/g, '""')}"`,
+          `"${(row.status || "Under Review").replace(/"/g, '""')}"`,
+          `"${(Array.isArray(row.interests) ? row.interests.join("; ") : row.interests || "").replace(/"/g, '""')}"`,
+          `"${(row.motivation || "").replace(/"/g, '""')}"`,
+          `"${(row.aiAgentIdea || "").replace(/"/g, '""')}"`
+        ];
+        csvRows.push(values.join(","));
+      });
+
+      const csvBlob = new Blob([csvRows.join("\n")], { type: "text/csv;charset=utf-8;" });
+      const downloadUrl = URL.createObjectURL(csvBlob);
+      const link = document.createElement("a");
+      link.href = downloadUrl;
+      link.download = `agentblazer_complete_roster_${new Date().toISOString().slice(0, 10)}.csv`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(downloadUrl);
+      showToast("Downloaded complete CSV roster.");
+    }
+
+    function seedSampleData() {
+      const existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      const samples = [
+        {
+          timestamp: new Date(Date.now() - 3600000 * 2).toISOString(),
+          registrationId: "AB-AMR-1024",
+          fullName: "Aarav Sharma",
+          collegeEmail: "aarav.cse@am.students.amrita.edu",
+          personalEmail: "aarav.dev@gmail.com",
+          contactNumber: "9876543210",
+          whatsappNumber: "9876543210",
+          year: "Third Year",
+          branch: "CSE",
+          section: "A",
+          interests: ["AI & AGENTIC AI", "AGENTFORCE", "CLOUD"],
+          motivation: "Passionate about autonomous LLM agents, Agentforce workflows, and multi-agent systems.",
+          aiAgentIdea: "An automated campus compute resource allocator for student deep learning workloads.",
+          status: "Selected"
+        },
+        {
+          timestamp: new Date(Date.now() - 3600000 * 5).toISOString(),
+          registrationId: "AB-AMR-2048",
+          fullName: "Ananya Iyer",
+          collegeEmail: "ananya.ai@am.students.amrita.edu",
+          personalEmail: "ananya.iyer99@gmail.com",
+          contactNumber: "9845123456",
+          whatsappNumber: "9845123456",
+          year: "Second Year",
+          branch: "AI",
+          section: "B",
+          interests: ["AI & AGENTIC AI", "DATA & ANALYTICS", "RESEARCH"],
+          motivation: "Eager to explore the Agentforce Champions Journey and participate in national hackathons.",
+          aiAgentIdea: "A conversational campus calendar agent that keeps students updated on exam timetables.",
+          status: "Selected"
+        },
+        {
+          timestamp: new Date(Date.now() - 3600000 * 12).toISOString(),
+          registrationId: "AB-AMR-3096",
+          fullName: "Rohan Varma",
+          collegeEmail: "rohan.ece@am.students.amrita.edu",
+          personalEmail: "rohan.varma24@gmail.com",
+          contactNumber: "9123456780",
+          whatsappNumber: "9123456780",
+          year: "First Year",
+          branch: "ECE",
+          section: "N/A",
+          interests: ["SOFTWARE DEVELOPMENT", "WEB DEVELOPMENT", "CYBERSECURITY"],
+          motivation: "Curious about intelligent IoT agents and cross-disciplinary hardware-software integration.",
+          aiAgentIdea: "An energy monitoring agent that detects idle electrical equipment across university labs.",
+          status: "Under Review"
+        }
+      ];
+
+      samples.forEach(s => {
+        if (!existing.some(r => r.registrationId === s.registrationId)) {
+          existing.unshift(s);
+        }
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
+    }
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, (m) => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      })[m]);
+    }
+  </script>
+</body>
+</html>

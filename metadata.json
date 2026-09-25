@@ -1,0 +1,6 @@
+{
+  "name": "Agentblazer — Amrita Amaravati",
+  "description": "Student technology community registration portal for Agentblazer at Amrita Vishwa Vidyapeetham, Amaravati.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
